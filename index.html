@@ -40,7 +40,7 @@
 
 	<div id="content-programs">
 		<!-- content -->
-		<div data-role="collapsible-set" data-bind="foreach: { data: entries }">
+		<div data-role="collapsible-set" data-bind="foreach: $data ">
 			<div class="entry" data-role="collapsible" data-collapsed="false">
 				<h3 data-bind="text: title"></h3>					
 				
@@ -81,6 +81,21 @@
 
 	<div id="content-essays">
 		<!-- content -->
+		<div data-role="collapsible-set" data-bind="foreach: $data ">
+			<div class="entry" data-role="collapsible" data-collapsed="false">
+				<h3 data-bind="text: title"></h3>					
+				
+				<b>Author:</b> <span data-bind="text: author"></span><p>
+				<b>Published:</b> <span data-bind="text: publishedDate"></span><p>
+				<p>
+					<span data-bind="html: content"></span>
+					<a data-bind="attr: {href: link}" >Full Story</a>							
+				</p>
+
+				<span><b>Categories:</b></span>
+				<div data-bind="text: categories().join(', ')"></div>							
+			</div>
+		</div>
 	</div>
 
 	<div id="footer-essays">
@@ -165,7 +180,7 @@
 			<div data-role="navbar">
 				<ul>            
 					<li><a href="#podcasts">Podcasts</a></li>
-					<li><a href="#essays">Essays</a></li>
+					<li><a class="essayBtn" href="#essays">Essays</a></li>
 					<li><a href="#feeds">Feeds</a></li>
 					<li><a href="#archive">Archive</a></li>
 				</ul>
