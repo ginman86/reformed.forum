@@ -77,6 +77,7 @@ access =
 		(
 			"http://ajax.googleapis.com/ajax/services/feed/load?v=1.0&q=" +
 			"http://feeds.feedburner.com/ReformedForum?format=xml"  + 
+			"&num=10" +
 		  	"&callback=?", 
 			null, 
 			function(response)
