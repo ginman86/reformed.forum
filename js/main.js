@@ -1,12 +1,14 @@
+var viewModels, nav, access;
 
-var viewModels =
+
+viewModels =
 {
 	programs: null,
 	essays:   null
 };
 
 $(document).ready(function () {	
-	access.loadPrograms();
+	access.loadViewModels();
 
 	initFooter();
 
@@ -17,29 +19,46 @@ $(document).ready(function () {
 		nav.essays();
 	});
 
+	$(".programBtn").on
+	('click', 
+	function(e)
+	{
+		nav.programs();
+	});
+
 	var header = $("#header-main").html();
 	$("[id^=header]").empty().append(header);	
 
 });
 
-var nav =
+nav =
 {
 	essays:
+	function()
+	{
+		access.loadViewModels();
+	},
+	programs:
+	function()
+	{
+		access.loadViewModels();
+	}
+};
+
+access = 
+{
+	loadViewModels:
 	function()
 	{
 		if (viewModels.essays == null)
 		{
 			access.loadPosts();
 		}
-		else
+		if (viewModels.programs == null)
 		{
-			ko.applyBindings(viewModels.essays, $('#essays').get(0));
+			access.loadPrograms();
 		}
-	}
-};
-
-var access = 
-{
+	},
 	loadPrograms:
 	function ()
 	{			
