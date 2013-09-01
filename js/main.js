@@ -4,11 +4,12 @@ var viewModels, nav, access;
 viewModels =
 {
 	programs: null,
-	essays:   null
+	essays:   null,
+	search:   null
 };
 
 $(document).ready(function () {	
-	access.loadViewModels();
+	access.loadViewModels();	
 
 	initFooter();
 
@@ -28,6 +29,15 @@ $(document).ready(function () {
 
 	var header = $("#header-main").html();
 	$("[id^=header]").empty().append(header);	
+
+	$("div[data-role='collapsible-set']").hide();
+
+	// $('.search-mini').on
+	// ('keypress',
+	// function(e)
+	// {
+	// 	access.search($(this).val());
+	// });
 
 });
 
@@ -76,6 +86,7 @@ access =
 					feed = ko.mapping.fromJS(response.responseData.feed);
 					viewModels.programs = feed.entries;
 					ko.applyBindings(viewModels.programs(), $('#programs').get(0));
+					$("div[data-role='collapsible-set']", $('#programs')).show();
 					$('#programs').trigger('create');	
 				}
 			}
@@ -98,11 +109,41 @@ access =
 					feed = ko.mapping.fromJS(response.responseData.feed);
 					viewModels.essays = feed.entries;
 					ko.applyBindings(viewModels.essays, $('#essays').get(0));
+					$("div[data-role='collapsible-set']", $('#essays')).show();
 					$('#essays').trigger('create');	
 				}
 			}
 		);
 	},
+	search:
+	function (searchTerm)
+	{			
+		var feed;
+		$.getJSON
+		(
+			"http://ajax.googleapis.com/ajax/services/feed/load?v=1.0&q=" +
+			"http://reformedforum.org/feed?s="  + searchTerm + 
+		  	"&callback=?", 
+			null, 
+			function(response)
+			{							
+				if (response && response.responseData && response.responseData.feed) 
+				{				
+					if (response.responseData.feed.entries && response.responseData.feed.entries.length > 0)
+					{
+						feed = ko.mapping.fromJS(response.responseData.feed);
+						viewModels.search = feed.entries;
+						ko.applyBindings(viewModels.search, $('#search').get(0));
+						$('#search').trigger('create');						
+					}
+					else
+					{
+						$(".searchResults").hide();	
+					}
+				}
+			}
+		);
+	}
 };
 
 function initFooter()
