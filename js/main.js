@@ -18,8 +18,7 @@ $(document).ready(function () {
 	});
 
 	var header = $("#header-main").html();
-	$("[id^=header]").empty().append(header);
-	$("div[data-role='page']").trigger('create');
+	$("[id^=header]").empty().append(header);	
 
 });
 
