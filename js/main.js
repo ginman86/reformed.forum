@@ -3,7 +3,7 @@ var viewModels, nav, access;
 
 viewModels =
 {
-	programs: null,
+	podcasts: null,
 	essays:   null,
 	search:   null
 };
@@ -24,7 +24,7 @@ $(document).ready(function () {
 	('click', 
 	function(e)
 	{
-		nav.programs();
+		nav.podcasts();
 	});
 
 	var header = $("#header-main").html();
@@ -47,7 +47,7 @@ nav =
 	{
 		access.loadViewModels();
 	},
-	programs:
+	podcasts:
 	function()
 	{
 		access.loadViewModels();
@@ -71,12 +71,12 @@ access =
 		{
 			access.loadPosts();
 		}
-		if (viewModels.programs == null)
+		if (viewModels.podcasts == null)
 		{
-			access.loadPrograms();
+			access.loadPodcasts();
 		}
 	},
-	loadPrograms:
+	loadPodcasts:
 	function ()
 	{			
 		var feed;
@@ -92,10 +92,10 @@ access =
 				if (response && response.responseData && response.responseData.feed) 
 				{	
 					feed = ko.mapping.fromJS(response.responseData.feed);
-					viewModels.programs = feed.entries;
-					ko.applyBindings(viewModels.programs(), $('#programs').get(0));
-					$("div[data-role='collapsible-set']", $('#programs')).show();
-					$('#programs').trigger('create');	
+					viewModels.podcasts = feed.entries;
+					ko.applyBindings(viewModels.podcasts(), $('#podcasts').get(0));
+					$("div[data-role='collapsible-set']", $('#podcasts')).show();
+					$('#podcasts-list').trigger('create');	
 				}
 			}
 		);
@@ -118,7 +118,7 @@ access =
 					viewModels.essays = feed.entries;
 					ko.applyBindings(viewModels.essays, $('#essays').get(0));
 					$("div[data-role='collapsible-set']", $('#essays')).show();
-					$('#essays').trigger('create');	
+					$('essay-list').trigger('create');	
 				}
 			}
 		);

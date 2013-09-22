@@ -18,10 +18,7 @@
     <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.js"></script>
     <script src="http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js"></script>
-
     <script type="text/javascript" src="js/knockout.mapping-latest.js"></script>
-    <script type="text/javascript" src="js/xml2json.js"></script>
-    <script type="text/javascript" src="js/json2xml.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
 </head>
 <body>
@@ -33,12 +30,12 @@
 	
 ***********************-->
 
-<div data-role="page" id="programs">
-	<div id="header-programs">
+<div data-role="page" id="podcasts">
+	<div id="header-podcasts">
 		<!--header-->
 	</div>	
 
-	<div id="content-programs" data-role="content">
+	<div id="content-podcasts" data-role="content">
 		<!-- content -->		
 		<input type="search" name="search-mini" class="search-mini" value="" data-mini="true" />
 		
@@ -64,7 +61,7 @@
 		</div>
 	</div>
 
-	<div id="footer-programs">
+	<div id="footer-podcasts">
 		<!-- footer -->	
 	</div>
 </div>
@@ -85,7 +82,7 @@
 		<!-- content -->
 		<input type="search" name="search-mini" class="search-mini" value="" data-mini="true" />
 
-		<div data-role="collapsible-set" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-inset="false" data-bind="foreach: $data ">
+		<div class="essay-list" data-role="collapsible-set" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-inset="false" data-bind="foreach: $data ">
 			<div class="entry" data-role="collapsible" data-collapsed="false">
 				<h3 data-bind="text: title"></h3>					
 				
@@ -112,7 +109,7 @@
 	search page
 	@ginman86 3/24/2013
 	
-************************-->
+************************-->	
 
 <div data-role="page" id="search">
 	<div id="header-search">
@@ -168,21 +165,21 @@
 
 <!--***********************
 
-	summary page
+	detail page
 	@ginman86 4/14/2013
 	
 ************************-->
 
-<div data-role="page" id="summary">
-	<div id="header-summary">
+<div data-role="page" id="detail">
+	<div id="header-detail">
 		<!-- header -->
 	</div>
 
-	<div id="content-summary">
+	<div id="content-detail">
 		<!-- content -->
 	</div>
 
-	<div id="footer-summary">
+	<div id="footer-detail">
 		<!-- footer -->
 	</div>
 </div>
@@ -200,7 +197,7 @@
 		<div data-role="footer" data-id="foo1" data-position="fixed">
 			<div data-role="navbar">
 				<ul>            
-					<li><a class="programBtn" href="#programs">Podcasts</a></li>
+					<li><a class="podcastBtn" href="#podcasts">Podcasts</a></li>
 					<li><a class="essayBtn" href="#essays">Essays</a></li>
 					<li><a class="searchBtn" href="#search">Search</a></li>
 				</ul>
@@ -214,7 +211,7 @@
 			<div class="logo">				
 				<img class="rfHeader" src="http://reformedforum.org/wp-content/themes/rf5/images/logo.png"/>
 			</div><!-- 
-			<a href="#programs" class="ui-btn-right" data-icon="home" data-iconpos="notext" data-direction="reverse">Home</a> -->
+			<a href="#podcasts" class="ui-btn-right" data-icon="home" data-iconpos="notext" data-direction="reverse">Home</a> -->
 		</div>
 	</div>
 	
