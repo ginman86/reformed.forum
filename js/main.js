@@ -1,5 +1,4 @@
-var viewModels, nav, access;
-
+var viewModels, nav, access, currentSearchTerm;
 
 viewModels =
 {
@@ -35,7 +34,9 @@ $(document).ready(function () {
 	$('.search-mini').keyup
 	(function(e)
 	{
-		if (e.keyCode === 13) nav.search($(this).val());
+		currentSearchTerm = $(this).val();
+		if (e.keyCode === 13) nav.search(currentSearchTerm);
+
 	});
 
 });
@@ -46,19 +47,20 @@ nav =
 	function()
 	{
 		access.loadViewModels();
+		syncSearch(currentSearchTerm);
 	},
 	podcasts:
 	function()
 	{
 		access.loadViewModels();
+		syncSearch(currentSearchTerm);
 	},
 	search:
 	function(searchTerm)
 	{
-		location.hash = '#search';
-
-		if (viewModels.search != null) viewModels.search
+		location.hash = '#search';		
 		access.search(searchTerm);
+		syncSearch(currentSearchTerm);
 	}
 };
 
@@ -74,7 +76,7 @@ access =
 		if (viewModels.podcasts == null)
 		{
 			access.loadPodcasts();
-		}
+		}		
 	},
 	loadPodcasts:
 	function ()
@@ -95,7 +97,7 @@ access =
 					viewModels.podcasts = feed.entries;
 					ko.applyBindings(viewModels.podcasts(), $('#podcasts').get(0));
 					$("div[data-role='collapsible-set']", $('#podcasts')).show();
-					$('#podcasts-list').trigger('create');	
+					$('.podcasts-list').trigger('create');						
 				}
 			}
 		);
@@ -118,7 +120,8 @@ access =
 					viewModels.essays = feed.entries;
 					ko.applyBindings(viewModels.essays, $('#essays').get(0));
 					$("div[data-role='collapsible-set']", $('#essays')).show();
-					$('essay-list').trigger('create');	
+					$('essay-list').trigger('create');		
+					syncSearch(currentSearchTerm);				
 				}
 			}
 		);
@@ -143,7 +146,8 @@ access =
 						viewModels.search = feed.entries;						
 						ko.applyBindings(viewModels.search, $('#search').get(0));
 						$("div[data-role='collapsible-set']", $('#search')).show();
-						$('#search').trigger('create');						
+						$('#search').trigger('create');			
+						syncSearch(currentSearchTerm);						
 					}
 					else
 					{
@@ -154,6 +158,14 @@ access =
 		);
 	}
 };
+
+//this is a hack for jQuery mobile's painfully awkward dom structure.
+function syncSearch(searchTerm)
+{
+	if (searchTerm)
+		$('.search-mini').val(searchTerm);
+
+}
 
 function initFooter()
 {		
